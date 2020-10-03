@@ -20,4 +20,3 @@ for creator in dataset_creator:
         X,y=creator(n_samples=iter)
         datasets.append(X)
 
-print(len(datasets))
