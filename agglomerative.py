@@ -12,7 +12,11 @@ agg_clustering=Clustering()
 
 distance_arr=np.zeros(shape=(arr.shape[0],arr.shape[0]))
 
-# for i in range(distance_arr.shape[0]):
-#     distance_arr[:,i]=get_distance()
-# print(norm(arr[0,:]-arr[9,:]))
-print(agg_clustering.get_distance(cen=arr[0,:],arr=arr[2,:],axis=0))
+
+i=0
+while i < arr.shape[0]:
+    point=arr[i]
+    for pointer in range(arr.shape[0]):
+        distance_arr[pointer,i]=agg_clustering.get_distance(cen=point,arr=arr[pointer],axis=0)
+    i+=1
+print(distance_arr)
