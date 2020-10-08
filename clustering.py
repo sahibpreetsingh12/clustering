@@ -71,5 +71,5 @@ class Clustering:
         
         
         
-k1=Clustering(2,datasets[0],200) # first arg is number of clusters for kmeans ,second arg=dataset third arg=number of iterations
+k1=Clustering(4,datasets[2],200) # first arg is number of clusters for kmeans ,second arg=dataset third arg=number of iterations
 k1.kmeans_calc()

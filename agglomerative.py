@@ -1,4 +1,4 @@
-from data_gen import datasets
+from data_gen import datasets # part of our own package
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -43,6 +43,21 @@ while i < arr.shape[0]:
 
 min_=np.where(distance_arr == np.amin(distance_arr))
 
-list_of_cordinates=list(zip(min_[0],min_[1]))
-for cord in list_of_cordinates:
-    print(cord)
+list_of_cordinates=list(zip(min_[0],min_[1])) # finding list of coordinates that have minimum values in proximity matrix
+
+# Important concepts
+
+# In our proximity matrix there will be multiple combinations when we'll have mimimum distance but we'll take one at a time
+
+
+# clustered_p_1 and clustered_p_2 corresponds to those 2 points who had contributed for least Euclidean distance in proximity matrix
+
+    
+clustered_p_1=list_of_cordinates[0][0] 
+clustered_p_2=list_of_cordinates[0][1]
+print("cluster made for point ",clustered_p_1 ,"and ",clustered_p_2)
+
+
+print(arr[clustered_p_1],np.sqrt(arr[clustered_p_1].dot(arr[clustered_p_1])))
+print(arr[clustered_p_2],np.sqrt(arr[clustered_p_2].dot(arr[clustered_p_2])))
+print("#####")
