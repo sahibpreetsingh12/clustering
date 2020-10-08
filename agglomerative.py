@@ -50,14 +50,27 @@ list_of_cordinates=list(zip(min_[0],min_[1])) # finding list of coordinates that
 # In our proximity matrix there will be multiple combinations when we'll have mimimum distance but we'll take one at a time
 
 
-# clustered_p_1 and clustered_p_2 corresponds to those 2 points who had contributed for least Euclidean distance in proximity matrix
+# clustered_p_1 and clustered_p_2 corresponds to those 2 points who had contributed for least Euclidean distance 
+# in proximity matrix
 
-    
+ 
+new_array=np.empty((0,arr.shape[1])) 
 clustered_p_1=list_of_cordinates[0][0] 
 clustered_p_2=list_of_cordinates[0][1]
 print("cluster made for point ",clustered_p_1 ,"and ",clustered_p_2)
 
 
-print(arr[clustered_p_1],np.sqrt(arr[clustered_p_1].dot(arr[clustered_p_1])))
-print(arr[clustered_p_2],np.sqrt(arr[clustered_p_2].dot(arr[clustered_p_2])))
+actual_1=arr[clustered_p_1].reshape(1,2)
+print(actual_1)
+# arr[clustered_p_2])
+
 print("#####")
+print(pd.DataFrame(distance_arr))
+
+# Have to think how can we utilise our previous calculations
+# print(np.where(distance_arr[list_of_cordinates[0][0]] == infinite, 0, distance_arr[list_of_cordinates[0][0]]))
+# print(np.where(distance_arr[list_of_cordinates[0][1]] == infinite, 0, distance_arr[list_of_cordinates[0][1]]))
+
+arr = 
+new_array=np.append(new_array,np.array(actual_1),axis=0)
+print(new_array)
