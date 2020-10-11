@@ -7,6 +7,8 @@ import math
 from clustering import Clustering # own clustering package
 from numpy.linalg import norm
 
+
+linkage_dictionary={}
 arr=np.array([[1,1],[2,2],[1,3],[2,1]
             ,[9,9],[10,10],[8,8],
             [15,15],[14,15],[15,14]])
@@ -52,25 +54,35 @@ def find_minimum_proximity(arr): # to find minimum of a array
     list_of_cordinates=list(zip(min_[0],min_[1])) # finding list of coordinates that have minimum values in proximity matrix
     return list_of_cordinates,minimum_distance
 
-# proximity=proximity_matrix_gen(arr) # arr is our Dataset return = proximity matrix
+proximity=proximity_matrix_gen(arr) # arr is our Dataset return = proximity matrix
 
-# list_of_coordinates,minimum_distance= find_minimum_proximity(proximity) # Input = Proximity matrix 
-#                                     #return = 1. minimum of proximity matrix and 2.coordinates that corresponds to minimum
-
-
-# new_array=np.empty((0,arr.shape[1]))  # empty array of shape 0,shape of arr[1] where arr is our dataset
-
-# # list_of_coordinates responds to those pair of points that have least euclidean distances in proximity matrix
-# # list_of_coordinates[0] responds to just first pair that had least euclidean distance
-# # because initially we had k clusters after step2 we'll have k-1 clusters although there can be multiple points that 
-# # form clusters because they have also least euclidean distance
+list_of_coordinates,minimum_distance= find_minimum_proximity(proximity) # Input = Proximity matrix 
+                                    #return = 1. minimum of proximity matrix and 2.coordinates that corresponds to minimum
 
 
-# clustered_p_1=list_of_coordinates[0][0] 
-# clustered_p_2=list_of_coordinates[0][1]
-# cluster_1=[]
-# print("cluster made for point ",clustered_p_1 ,"and ",clustered_p_2)
-# cluster_1.append([clustered_p_1,clustered_p_2,minimum_distance])
+new_array=np.empty((0,arr.shape[1]))  # empty array of shape 0,shape of arr[1] where arr is our dataset
+
+# list_of_coordinates responds to those pair of points that have least euclidean distances in proximity matrix
+# list_of_coordinates[0] responds to just first pair that had least euclidean distance
+# because initially we had k clusters after step2 we'll have k-1 clusters although there can be multiple points that 
+# form clusters because they have also least euclidean distance
+
+linkage_matrix=np.empty((0,4)) #final linkage matrix
+
+clustered_p_1=list_of_coordinates[0][0] 
+clustered_p_2=list_of_coordinates[0][1]
+cluster_1=[clustered_p_1,clustered_p_2]
+
+print("cluster made for point ",clustered_p_1 ,"and ",clustered_p_2)
+
+linkage_dictionary[11]=cluster_1
+
+linkage_row=np.array([clustered_p_1,clustered_p_2,minimum_distance,len(linkage_dictionary[11])]).reshape(4,1).T
+
+linkage_matrix=np.append(linkage_matrix,linkage_row,axis=0)
+
+print(linkage_row,linkage_row.shape,linkage_matrix.shape)
+
 
 
 # actual_1=arr[clustered_p_1].reshape(1,2)
@@ -95,39 +107,6 @@ def find_minimum_proximity(arr): # to find minimum of a array
 # print("#########")
 # list_of_coordinate,minimum_distance = find_minimum_proximity(new_proximity)  # finding new minimum from new proximity matrix
 # print(list_of_coordinate[0],minimum_distance)
-
-
-for i in range(2):
-    proximity=proximity_matrix_gen(arr) # arr is our Dataset return = proximity matrix
-
-    print(pd.DataFrame(proximity))
-
-    list_of_coordinates,minimum_distance= find_minimum_proximity(proximity) # Input = Proximity matrix 
-                                    #return = 1.coordinates that corresponds to minimum , 2. minimum distance bw any 2 cluster points of that cluster
-
-    new_array=np.empty((0,arr.shape[1]))  # empty array of shape 0,shape of arr[1] where arr is our dataset
-
-    clustered_p_1=list_of_coordinates[0][0] 
-
-    clustered_p_2=list_of_coordinates[0][1]
-
-    cluster_1=[]
-
-    print("cluster made for point ",clustered_p_1 ,"and ",clustered_p_2)
-
-    cluster_1.append([clustered_p_1,clustered_p_2])
-
-    actual_1=arr[clustered_p_1].reshape(1,2)
-
-    actual_2=arr[clustered_p_2].reshape(1,2)
-
-    arr=np.delete(arr,[clustered_p_1,clustered_p_2],axis=0) # removing rows that were clustered from original array
-
-    arr=np.concatenate((new_array,arr)) # appending those n-2 elements that were left from dataset
-
-    # new_proximity=proximity_matrix_gen(arr)
-
-
 
 
 
