@@ -77,6 +77,8 @@ print("cluster made for point ",clustered_p_1 ,"and ",clustered_p_2)
 
 linkage_dictionary[11]=cluster_1
 
+# Making each row for linkage matrix 
+# each row is of the format as described here https://stackoverflow.com/questions/9838861/scipy-linkage-format
 linkage_row=np.array([clustered_p_1,clustered_p_2,minimum_distance,len(linkage_dictionary[11])]).reshape(4,1).T
 
 linkage_matrix=np.append(linkage_matrix,linkage_row,axis=0)
