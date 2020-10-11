@@ -81,7 +81,7 @@ linkage_row=np.array([clustered_p_1,clustered_p_2,minimum_distance,len(linkage_d
 
 linkage_matrix=np.append(linkage_matrix,linkage_row,axis=0)
 
-print(linkage_row,linkage_row.shape,linkage_matrix.shape)
+print(linkage_row,linkage_row.shape)
 
 
 
