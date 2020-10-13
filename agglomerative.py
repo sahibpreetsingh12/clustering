@@ -61,11 +61,10 @@ list_of_coordinates,minimum_distance= find_minimum_proximity(proximity) # Input 
 
 
 new_array=np.empty((0,arr.shape[1]))  # empty array of shape 0,shape of arr[1] where arr is our dataset
-
-# list_of_coordinates responds to those pair of points that have least euclidean distances in proximity matrix
-# list_of_coordinates[0] responds to just first pair that had least euclidean distance
-# because initially we had k clusters after step2 we'll have k-1 clusters although there can be multiple points that 
-# form clusters because they have also least euclidean distance
+                # list_of_coordinates responds to those pair of points that have least euclidean distances in proximity matrix
+                # list_of_coordinates[0] responds to just first pair that had least euclidean distance
+                # because initially we had k clusters after step2 we'll have k-1 clusters although there can be multiple points that 
+                # form clusters because they have also least euclidean distance
 
 linkage_matrix=np.empty((0,4)) #final linkage matrix
 
@@ -83,16 +82,22 @@ linkage_row=np.array([clustered_p_1,clustered_p_2,minimum_distance,len(linkage_d
 
 linkage_matrix=np.append(linkage_matrix,linkage_row,axis=0)
 
-print(linkage_row,linkage_row.shape)
+print(linkage_row)
+
+#Now here we will decide our loop structure
 
 
+actual_1=arr[clustered_p_1].reshape(1,2)
 
-# actual_1=arr[clustered_p_1].reshape(1,2)
-
-# actual_2=arr[clustered_p_2].reshape(1,2)
+actual_2=arr[clustered_p_2].reshape(1,2)
 
 # arr=np.delete(arr,[clustered_p_1,clustered_p_2],axis=0) # removing rows that were clustered from original array
 
+temp=Clustering()
+print(arr)
+print(temp.get_distance(actual_1,arr,axis=1))
+print(temp.get_distance(cen=actual_2,arr=arr,axis=1))
+print(np.minimum(temp.get_distance(actual_1,arr,axis=1),temp.get_distance(actual_2,arr,axis=1)))
 
 # print("#####")
 
