@@ -91,29 +91,67 @@ actual_1=arr[clustered_p_1].reshape(1,2)
 
 actual_2=arr[clustered_p_2].reshape(1,2)
 
-# arr=np.delete(arr,[clustered_p_1,clustered_p_2],axis=0) # removing rows that were clustered from original array
+arr=np.delete(arr,[clustered_p_1,clustered_p_2],axis=0) # removing rows that were clustered from original array
 
-temp=Clustering()
+# temp=Clustering()
 print(arr)
-print(temp.get_distance(actual_1,arr,axis=1))
-print(temp.get_distance(cen=actual_2,arr=arr,axis=1))
-print(np.minimum(temp.get_distance(actual_1,arr,axis=1),temp.get_distance(actual_2,arr,axis=1)))
+print(agg_clustering.get_distance(actual_1,arr,axis=1).shape)
+print(agg_clustering.get_distance(cen=actual_2,arr=arr,axis=1))
+print(np.minimum(agg_clustering.get_distance(actual_1,arr,axis=1),agg_clustering.get_distance(actual_2,arr,axis=1)),"\t MINIMUM element wise")
 
-# print("#####")
+print('\n',linkage_matrix,'and linkage dictionary is',linkage_dictionary)
+print("#####")
 
-
-# new_array=np.append(new_array,actual_2,axis=0) # forming new array 1. appending one of the two points that were clustered
-
-# arr=np.concatenate((new_array,arr)) # appending those n-2 elements that were left from dataset
-
-# new_proximity=proximity_matrix_gen(arr)
+# To be deleted --- The name of the point appended will come from name of iterable variable in for loop
+new_array=np.append(new_array,np.array([11,11]).reshape(1,2),axis=0) 
+# forming new array 1. Appending a point who coordinates are name of newly formed cluster
 
 
-# # print(pd.DataFrame(new_proximity))
+arr=np.concatenate((new_array,arr)) # appending those n-2 elements that were left from dataset
 
-# print("#########")
+# LOOP's second iteration
+print(pd.DataFrame(arr),"array is :")
+new_proximity=proximity_matrix_gen(arr)
+
+print(pd.DataFrame(new_proximity),"NEW proximity matrix")
+list_of_coordinates,minimum_distance= find_minimum_proximity(new_proximity) # Input = Proximity matrix 
+                                    #return = 1. minimum of proximity matrix and 2.coordinates that corresponds to minimum
+
+
+new_array=np.empty((0,arr.shape[1]))
 # list_of_coordinate,minimum_distance = find_minimum_proximity(new_proximity)  # finding new minimum from new proximity matrix
-# print(list_of_coordinate[0],minimum_distance)
+
+
+clustered_p_1=list_of_coordinates[0][0] 
+clustered_p_2=list_of_coordinates[0][1]
+cluster_2=[clustered_p_1,clustered_p_2]
+
+print("cluster made for point ",clustered_p_1 ,"and ",clustered_p_2)
+
+linkage_dictionary[12]=cluster_2
+
+linkage_row=np.array([clustered_p_1,clustered_p_2,minimum_distance,len(linkage_dictionary[11])]).reshape(4,1).T
+
+linkage_matrix=np.append(linkage_matrix,linkage_row,axis=0)
+
+print( "FINAL LINKAGE MATRIX AFTER 2 ITERATIONS",linkage_matrix)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
